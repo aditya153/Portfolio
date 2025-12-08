@@ -1,0 +1,358 @@
+/* WAVING GOLDEN RETRIEVER PUPPY */
+
+:root {
+  --gold-dark: #d48e3e;
+  --gold-mid: #f6b55a;
+  --gold-light: #ffd58a;
+  --cream: #fff4db;
+  --nose: #3e2723;
+  --tongue: #ff8a80;
+}
+
+.puppy {
+  position: relative;
+  width: 300px;
+  height: 340px;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+/* --- TAIL --- */
+.tail {
+  position: absolute;
+  bottom: 20px;
+  right: 40px;
+  width: 30px;
+  height: 80px;
+  background: var(--gold-mid);
+  border-radius: 30px;
+  transform-origin: bottom center;
+  transform: rotate(30deg);
+  z-index: 1;
+  animation: wag 0.8s ease-in-out infinite alternate;
+}
+
+/* --- BODY (Sitting) --- */
+.body {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 160px;
+  background: var(--gold-mid);
+  border-radius: 70px 70px 40px 40px;
+  z-index: 2;
+  box-shadow: inset -10px 0 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Chest Patch */
+.chest {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 90px;
+  background: var(--cream);
+  border-radius: 50%;
+  z-index: 3;
+}
+
+/* --- HIND LEGS (Sitting) --- */
+.leg-hind {
+  position: absolute;
+  bottom: 0;
+  width: 70px;
+  height: 90px;
+  background: var(--gold-dark);
+  border-radius: 50% 50% 20% 20%;
+  z-index: 1;
+}
+
+.leg-hind.left {
+  left: 30px;
+  transform: rotate(-20deg);
+}
+
+.leg-hind.right {
+  right: 30px;
+  transform: rotate(20deg);
+}
+
+/* Hind Paws */
+.paw-hind {
+  position: absolute;
+  bottom: 0;
+  width: 50px;
+  height: 30px;
+  background: var(--cream);
+  border-radius: 20px 20px 0 0;
+  z-index: 2;
+}
+
+.leg-hind.left .paw-hind {
+  left: -10px;
+  transform: rotate(20deg);
+}
+
+.leg-hind.right .paw-hind {
+  right: -10px;
+  transform: rotate(-20deg);
+}
+
+
+/* --- FRONT PAWS --- */
+/* Left Paw (Planted) */
+.paw-front-left {
+  position: absolute;
+  bottom: 0;
+  left: 100px;
+  width: 35px;
+  height: 90px;
+  background: var(--gold-mid);
+  border-radius: 20px;
+  z-index: 4;
+}
+
+.paw-front-left::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 40px;
+  height: 25px;
+  background: var(--cream);
+  border-radius: 15px 15px 0 0;
+  left: -2px;
+}
+
+/* Right Paw (Waving!) */
+.paw-front-right-wrapper {
+  position: absolute;
+  bottom: 60px;
+  /* Raised up */
+  right: 90px;
+  width: 35px;
+  height: 90px;
+  transform-origin: bottom center;
+  z-index: 5;
+  animation: wave 1s ease-in-out infinite;
+}
+
+.paw-front-right {
+  width: 100%;
+  height: 100%;
+  background: var(--gold-mid);
+  border-radius: 20px;
+}
+
+.paw-front-right::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 40px;
+  height: 30px;
+  background: var(--cream);
+  border-radius: 15px 15px 10px 10px;
+  left: -2px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  /* Shadow under paw pad */
+}
+
+/* Pads on the waving paw */
+.paw-pads {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 25px;
+  height: 20px;
+  z-index: 6;
+  opacity: 0.6;
+}
+
+.pad-main {
+  position: absolute;
+  top: 10px;
+  left: 6px;
+  width: 14px;
+  height: 10px;
+  background: #d48e3e;
+  border-radius: 50%;
+}
+
+.pad-toe {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #d48e3e;
+  border-radius: 50%;
+}
+
+
+/* --- HEAD --- */
+.head {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 170px;
+  height: 150px;
+  background: var(--gold-mid);
+  border-radius: 45% 45% 40% 40%;
+  z-index: 10;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Snout/Muzzle */
+.muzzle {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 60px;
+  background: var(--cream);
+  border-radius: 40% 40% 50% 50%;
+  z-index: 12;
+}
+
+.nose {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 16px;
+  background: var(--nose);
+  border-radius: 10px 10px 20px 20px;
+}
+
+.nose::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 5px;
+  width: 6px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+}
+
+.mouth {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 15px;
+  border-bottom: 3px solid var(--nose);
+  border-radius: 0 0 15px 15px;
+}
+
+/* Eyes */
+.eye {
+  position: absolute;
+  top: 55px;
+  width: 18px;
+  height: 22px;
+  background: var(--nose);
+  border-radius: 50%;
+  z-index: 13;
+}
+
+.eye.left {
+  left: 45px;
+}
+
+.eye.right {
+  right: 45px;
+}
+
+.eye::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+}
+
+/* Ears */
+.ear {
+  position: absolute;
+  top: 10px;
+  width: 60px;
+  height: 110px;
+  background: var(--gold-dark);
+  border-radius: 30px 30px 50px 50%;
+  z-index: 9;
+  box-shadow: inset 5px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.ear.left {
+  left: -15px;
+  transform-origin: top right;
+  transform: rotate(-10deg);
+}
+
+.ear.right {
+  right: -15px;
+  transform-origin: top left;
+  transform: rotate(10deg);
+}
+
+/* --- ANIMATIONS --- */
+
+/* Waving Animation */
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(40deg) translateY(-5px);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* Tail Wagging */
+@keyframes wag {
+  from {
+    transform: rotate(20deg);
+  }
+
+  to {
+    transform: rotate(45deg);
+  }
+}
+
+/* Text Bubble */
+.bubble {
+  position: absolute;
+  top: 0px;
+  right: -60px;
+  background: white;
+  padding: 10px 20px;
+  border-radius: 20px 20px 20px 0;
+  font-weight: bold;
+  color: #555;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}

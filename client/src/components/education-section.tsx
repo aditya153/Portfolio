@@ -38,7 +38,7 @@ const educations: Education[] = [
 
 export function EducationSection() {
   return (
-    <section id="education" className="py-20 md:py-32 px-6 md:px-8 bg-card/30">
+    <section id="education" className="py-12 md:py-20 px-6 md:px-8 bg-card/30">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
@@ -106,22 +106,6 @@ export function EducationSection() {
             </Card>
           ))}
         </div>
-
-        <Card className="mt-12 animate-fadeInUp" style={{ animationDelay: "0.3s" }}>
-          <CardContent className="p-6">
-            <div className="text-center">
-              <h3 className="font-display font-semibold text-lg mb-2">
-                Current Research
-              </h3>
-              <p className="text-muted-foreground mb-4">
-                Digital Twins and the Structure in the Asset Administration Shell
-              </p>
-              <Badge variant="secondary">
-                Seminar under Prof. Christoph Grimm
-              </Badge>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </section>
   );

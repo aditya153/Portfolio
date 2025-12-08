@@ -1,9 +1,7 @@
-import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { ChevronDown, ChevronUp, Briefcase, Calendar, MapPin } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Briefcase, Calendar, MapPin } from "lucide-react";
+import { motion } from "framer-motion";
 
 interface Experience {
   id: string;
@@ -50,11 +48,56 @@ const experiences: Experience[] = [
   },
 ];
 
+// Helper function to highlight keywords in experience descriptions
+const highlightKeywords = (text: string) => {
+  const keywords = [
+    'microservices', 'REST APIs', 'Java Spring Boot', 'real-time data processing',
+    'IoT', 'microservice architecture', 'scalability', 'Spring Security', 'JWT',
+    'role-based access control', 'MongoDB', '40%', 'agile development',
+    'ETL processes', 'Big Data', 'anomaly detection', 'Support Vector Machine',
+    'SVM', 'fraud monitoring', 'Power BI', 'DAX', 'Power Query',
+    'proof-of-concept', 'fraud detection'
+  ];
+
+  let parts: (string | JSX.Element)[] = [text];
+
+  keywords.forEach((keyword, index) => {
+    const newParts: (string | JSX.Element)[] = [];
+
+    parts.forEach((part) => {
+      if (typeof part === 'string') {
+        const regex = new RegExp(`(${keyword})`, 'gi');
+        const segments = part.split(regex);
+
+        segments.forEach((segment, i) => {
+          if (segment.toLowerCase() === keyword.toLowerCase()) {
+            newParts.push(
+              <span
+                key={`${index}-${i}`}
+                className="font-semibold text-foreground bg-primary/10 px-1 py-0.5 rounded"
+              >
+                {segment}
+              </span>
+            );
+          } else if (segment) {
+            newParts.push(segment);
+          }
+        });
+      } else {
+        newParts.push(part);
+      }
+    });
+
+    parts = newParts;
+  });
+
+  return parts;
+};
+
 export function ExperienceSection() {
-  const [expandedId, setExpandedId] = useState<string | null>("two-registers");
 
   return (
-    <section id="experience" className="py-20 md:py-32 px-6 md:px-8">
+    <section id="experience" className="py-12 md:py-20 px-6 md:px-8">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
@@ -91,9 +134,7 @@ export function ExperienceSection() {
                 </div>
 
                 <Card
-                  className={`mt-6 transition-all duration-300 ${
-                    expandedId === exp.id ? "border-primary/30 shadow-lg shadow-primary/5" : ""
-                  }`}
+                  className="mt-6"
                   data-testid={`card-experience-${exp.id}`}
                 >
                   <CardHeader className="pb-4">
@@ -132,60 +173,29 @@ export function ExperienceSection() {
                   </CardHeader>
 
                   <CardContent>
-                    <AnimatePresence>
-                      {expandedId === exp.id && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.3 }}
+                    <ul className="space-y-3">
+                      {exp.description.map((item, idx) => (
+                        <motion.li
+                          key={idx}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: idx * 0.1 }}
+                          className="flex gap-3 text-muted-foreground"
                         >
-                          <ul className="space-y-3 mb-4">
-                            {exp.description.map((item, idx) => (
-                              <motion.li
-                                key={idx}
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: idx * 0.1 }}
-                                className="flex gap-3 text-muted-foreground"
-                              >
-                                <span className="text-primary mt-1.5 flex-shrink-0">
-                                  <svg
-                                    className="h-2 w-2 fill-current"
-                                    viewBox="0 0 8 8"
-                                  >
-                                    <circle cx="4" cy="4" r="4" />
-                                  </svg>
-                                </span>
-                                <span className="text-sm md:text-base leading-relaxed">
-                                  {item}
-                                </span>
-                              </motion.li>
-                            ))}
-                          </ul>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() =>
-                        setExpandedId(expandedId === exp.id ? null : exp.id)
-                      }
-                      className="w-full justify-center gap-2"
-                      data-testid={`button-expand-${exp.id}`}
-                    >
-                      {expandedId === exp.id ? (
-                        <>
-                          Show Less <ChevronUp className="h-4 w-4" />
-                        </>
-                      ) : (
-                        <>
-                          Show More <ChevronDown className="h-4 w-4" />
-                        </>
-                      )}
-                    </Button>
+                          <span className="text-primary mt-1.5 flex-shrink-0">
+                            <svg
+                              className="h-2 w-2 fill-current"
+                              viewBox="0 0 8 8"
+                            >
+                              <circle cx="4" cy="4" r="4" />
+                            </svg>
+                          </span>
+                          <span className="text-sm md:text-base leading-relaxed">
+                            {highlightKeywords(item)}
+                          </span>
+                        </motion.li>
+                      ))}
+                    </ul>
                   </CardContent>
                 </Card>
               </motion.div>

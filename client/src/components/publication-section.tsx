@@ -5,7 +5,7 @@ import { FileText, ExternalLink, BookOpen } from "lucide-react";
 
 export function PublicationSection() {
   return (
-    <section id="publication" className="py-20 md:py-32 px-6 md:px-8">
+    <section id="publication" className="py-12 md:py-20 px-6 md:px-8">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">

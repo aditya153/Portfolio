@@ -86,7 +86,7 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-20 md:py-32 px-6 md:px-8 bg-card/30">
+    <section id="contact" className="py-12 md:py-20 px-6 md:px-8 bg-card/30">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
@@ -291,7 +291,7 @@ export function ContactSection() {
                     </p>
                   </div>
                   <Button variant="outline" asChild data-testid="button-download-cv-section">
-                    <a href="/api/cv/download" download="Aditya_Nirgude_CV.pdf">
+                    <a href="/Aditya_Nirgude_CV.pdf" download="Aditya_Nirgude_CV.pdf" target="_blank" rel="noopener noreferrer">
                       <Download className="mr-2 h-4 w-4" />
                       Download
                     </a>
