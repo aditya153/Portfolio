@@ -116,16 +116,23 @@ function ImageGallery({ images, title }: { images: string[]; title: string }) {
     return (
         <>
             <div
-                className="relative mb-4 rounded-lg overflow-hidden group/gallery"
+                className="relative mb-4 rounded-lg overflow-hidden group/gallery h-40"
                 onMouseEnter={() => setIsPaused(true)}
                 onMouseLeave={() => setIsPaused(false)}
             >
-                <img
-                    src={images[currentIndex]}
-                    alt={`${title} - Image ${currentIndex + 1}`}
-                    className="w-full h-40 object-cover cursor-pointer transition-transform duration-300 hover:scale-105"
-                    onClick={() => setIsModalOpen(true)}
-                />
+                <AnimatePresence mode="wait">
+                    <motion.img
+                        key={currentIndex}
+                        src={images[currentIndex]}
+                        alt={`${title} - Image ${currentIndex + 1}`}
+                        className="w-full h-40 object-cover cursor-pointer absolute inset-0"
+                        onClick={() => setIsModalOpen(true)}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.5, ease: "easeInOut" }}
+                    />
+                </AnimatePresence>
 
                 {images.length > 1 && (
                     <>
