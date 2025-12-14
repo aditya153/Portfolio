@@ -62,6 +62,13 @@ const achievements: Achievement[] = [
         linkedinUrl:
             "https://www.linkedin.com/posts/aditya-nirgude-24170b173_honored-to-be-a-judge-at-sinhgad-techtonic-activity-7163575299887108096-DS6l",
         highlights: ["Alumni Representative", "Virtual Treasure Hunt", "Student Innovation"],
+        images: [
+            "/techtonic-1.jpg",
+            "/techtonic-2.jpg",
+            "/techtonic-3.jpg",
+            "/techtonic-4.jpg",
+            "/techtonic-5.jpg",
+        ],
     },
 ];
 
