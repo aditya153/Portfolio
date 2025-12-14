@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -97,13 +97,29 @@ const getTypeBadge = (type: Achievement["type"]) => {
 function ImageGallery({ images, title }: { images: string[]; title: string }) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isPaused, setIsPaused] = useState(false);
 
     const nextImage = () => setCurrentIndex((prev) => (prev + 1) % images.length);
     const prevImage = () => setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
 
+    // Auto-scroll effect
+    useEffect(() => {
+        if (isPaused || isModalOpen || images.length <= 1) return;
+
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % images.length);
+        }, 3000); // Change image every 3 seconds
+
+        return () => clearInterval(interval);
+    }, [isPaused, isModalOpen, images.length]);
+
     return (
         <>
-            <div className="relative mb-4 rounded-lg overflow-hidden group/gallery">
+            <div
+                className="relative mb-4 rounded-lg overflow-hidden group/gallery"
+                onMouseEnter={() => setIsPaused(true)}
+                onMouseLeave={() => setIsPaused(false)}
+            >
                 <img
                     src={images[currentIndex]}
                     alt={`${title} - Image ${currentIndex + 1}`}
