@@ -3,7 +3,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github, Bot, Workflow, Users, FileText, Brain } from "lucide-react";
 import { motion } from "framer-motion";
-import infographicPath from "@assets/infographic_1764881304304.png";
 
 interface ProjectFeature {
   icon: React.ReactNode;
@@ -51,7 +50,7 @@ const projects: Project[] = [
     ],
     technologies: ["React.js", "Vannila CSS", "CrewAI", "Docker", "PostgreSQL", "GPT-4", "FastAPI", "MCP"],
     github: "https://github.com/aditya153/address-change-automation",
-    image: infographicPath,
+    image: "/infographic.png",
     featured: true,
     status: "Active Project",
   },
