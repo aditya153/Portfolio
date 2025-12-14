@@ -4,6 +4,7 @@ import { ExperienceSection } from "@/components/experience-section";
 import { ProjectsSection } from "@/components/projects-section";
 import { ResearchSection } from "@/components/research-section";
 import { SkillsSection } from "@/components/skills-section";
+import { AchievementsSection } from "@/components/achievements-section";
 import { EducationSection } from "@/components/education-section";
 import { PublicationSection } from "@/components/publication-section";
 import { ContactSection } from "@/components/contact-section";
@@ -19,6 +20,7 @@ export default function Portfolio() {
         <ProjectsSection />
         <ResearchSection />
         <SkillsSection />
+        <AchievementsSection />
         <EducationSection />
         <PublicationSection />
         <ContactSection />
@@ -27,3 +29,4 @@ export default function Portfolio() {
     </div>
   );
 }
+
