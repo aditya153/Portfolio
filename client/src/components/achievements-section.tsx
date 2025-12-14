@@ -46,6 +46,11 @@ const achievements: Achievement[] = [
         linkedinUrl:
             "https://www.linkedin.com/posts/aditya-nirgude-24170b173_what-an-incredible-journey-it-has-been-activity-7117874209757802496-HM0b",
         highlights: ["AI & Data Science Department", "Web Scraping Techniques", "Hands-on Training"],
+        images: [
+            "/web-scraping-1.jpg",
+            "/web-scraping-2.jpg",
+            "/web-scraping-3.jpg",
+        ],
     },
     {
         id: "techtonic-judge",
