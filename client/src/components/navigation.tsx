@@ -43,7 +43,7 @@ export function Navigation() {
             AN<span className="text-primary">.</span>
           </a>
 
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-1 ml-auto">
             {navItems.map((item) => (
               <a
                 key={item.href}
