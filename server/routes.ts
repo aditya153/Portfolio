@@ -10,7 +10,7 @@ export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
-  
+
   app.post("/api/contact", async (req, res) => {
     try {
       const validatedData = insertContactMessageSchema.parse(req.body);
@@ -18,24 +18,24 @@ export async function registerRoutes(
       res.json({ success: true, id: message.id });
     } catch (error) {
       if (error instanceof z.ZodError) {
-        res.status(400).json({ 
-          success: false, 
-          error: "Validation failed", 
-          details: error.errors 
+        res.status(400).json({
+          success: false,
+          error: "Validation failed",
+          details: error.errors
         });
       } else {
         console.error("Contact form error:", error);
-        res.status(500).json({ 
-          success: false, 
-          error: "Failed to submit message" 
+        res.status(500).json({
+          success: false,
+          error: "Failed to submit message"
         });
       }
     }
   });
 
   app.get("/api/cv/download", (req, res) => {
-    const cvPath = path.join(process.cwd(), "attached_assets", "Aditya_Nirgude_Lebenslauf_1764881293593.pdf");
-    
+    const cvPath = path.join(process.cwd(), "attached_assets", "Aditya_Nirgude_Lebenslauf.pdf");
+
     if (fs.existsSync(cvPath)) {
       res.setHeader("Content-Type", "application/pdf");
       res.setHeader("Content-Disposition", "attachment; filename=Aditya_Nirgude_CV.pdf");
