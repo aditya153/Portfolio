@@ -1,9 +1,10 @@
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Award, Users, Code, Calendar } from "lucide-react";
+import { ExternalLink, Award, Code, Calendar, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { SiLinkedin } from "react-icons/si";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Achievement {
     id: string;
@@ -13,6 +14,7 @@ interface Achievement {
     type: "workshop" | "judge" | "award";
     linkedinUrl: string;
     highlights: string[];
+    images?: string[];
 }
 
 const achievements: Achievement[] = [
@@ -26,6 +28,13 @@ const achievements: Achievement[] = [
         linkedinUrl:
             "https://www.linkedin.com/posts/aditya-nirgude-24170b173_tcoer-itworkshop-candcplusplus-activity-7106641784134377472-XMJ3",
         highlights: ["Second-year IT students", "TCOER College", "Titans Student Team"],
+        images: [
+            "/cpp-workshop-1.jpg",
+            "/cpp-workshop-2.jpg",
+            "/cpp-workshop-3.jpg",
+            "/cpp-workshop-4.jpg",
+            "/cpp-workshop-5.jpg",
+        ],
     },
     {
         id: "web-scraping-workshop",
@@ -73,6 +82,106 @@ const getTypeBadge = (type: Achievement["type"]) => {
     }
 };
 
+function ImageGallery({ images, title }: { images: string[]; title: string }) {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const nextImage = () => setCurrentIndex((prev) => (prev + 1) % images.length);
+    const prevImage = () => setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+
+    return (
+        <>
+            <div className="relative mb-4 rounded-lg overflow-hidden group/gallery">
+                <img
+                    src={images[currentIndex]}
+                    alt={`${title} - Image ${currentIndex + 1}`}
+                    className="w-full h-40 object-cover cursor-pointer transition-transform duration-300 hover:scale-105"
+                    onClick={() => setIsModalOpen(true)}
+                />
+
+                {images.length > 1 && (
+                    <>
+                        <button
+                            onClick={(e) => { e.stopPropagation(); prevImage(); }}
+                            className="absolute left-2 top-1/2 -translate-y-1/2 p-1 rounded-full bg-background/80 opacity-0 group-hover/gallery:opacity-100 transition-opacity"
+                        >
+                            <ChevronLeft className="h-4 w-4" />
+                        </button>
+                        <button
+                            onClick={(e) => { e.stopPropagation(); nextImage(); }}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-full bg-background/80 opacity-0 group-hover/gallery:opacity-100 transition-opacity"
+                        >
+                            <ChevronRight className="h-4 w-4" />
+                        </button>
+                        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
+                            {images.map((_, idx) => (
+                                <button
+                                    key={idx}
+                                    onClick={(e) => { e.stopPropagation(); setCurrentIndex(idx); }}
+                                    className={`w-2 h-2 rounded-full transition-colors ${idx === currentIndex ? "bg-primary" : "bg-background/60"
+                                        }`}
+                                />
+                            ))}
+                        </div>
+                    </>
+                )}
+            </div>
+
+            {/* Modal for full-size image */}
+            <AnimatePresence>
+                {isModalOpen && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-50 flex items-center justify-center bg-background/90 backdrop-blur-sm p-4"
+                        onClick={() => setIsModalOpen(false)}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.9 }}
+                            animate={{ scale: 1 }}
+                            exit={{ scale: 0.9 }}
+                            className="relative max-w-4xl max-h-[90vh]"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <img
+                                src={images[currentIndex]}
+                                alt={`${title} - Image ${currentIndex + 1}`}
+                                className="max-w-full max-h-[85vh] object-contain rounded-lg"
+                            />
+                            <button
+                                onClick={() => setIsModalOpen(false)}
+                                className="absolute -top-10 right-0 p-2 rounded-full bg-muted hover:bg-muted/80 transition-colors"
+                            >
+                                <X className="h-5 w-5" />
+                            </button>
+                            {images.length > 1 && (
+                                <>
+                                    <button
+                                        onClick={prevImage}
+                                        className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-background/80 hover:bg-background transition-colors"
+                                    >
+                                        <ChevronLeft className="h-6 w-6" />
+                                    </button>
+                                    <button
+                                        onClick={nextImage}
+                                        className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-background/80 hover:bg-background transition-colors"
+                                    >
+                                        <ChevronRight className="h-6 w-6" />
+                                    </button>
+                                    <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-sm text-muted-foreground">
+                                        {currentIndex + 1} / {images.length}
+                                    </div>
+                                </>
+                            )}
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </>
+    );
+}
+
 export function AchievementsSection() {
     return (
         <section id="achievements" className="py-12 md:py-20 px-6 md:px-8">
@@ -99,7 +208,13 @@ export function AchievementsSection() {
                                 className="group h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5"
                                 data-testid={`card-achievement-${achievement.id}`}
                             >
-                                <CardHeader className="pb-3">
+                                {achievement.images && achievement.images.length > 0 && (
+                                    <div className="p-4 pb-0">
+                                        <ImageGallery images={achievement.images} title={achievement.title} />
+                                    </div>
+                                )}
+
+                                <CardHeader className={achievement.images ? "pt-0 pb-3" : "pb-3"}>
                                     <div className="flex items-center justify-between mb-2">
                                         <div className="p-2 rounded-lg bg-primary/10 text-primary">
                                             {getTypeIcon(achievement.type)}
