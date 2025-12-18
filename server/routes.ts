@@ -11,7 +11,12 @@ export function registerRoutes(
   app: Express
 ): Server {
 
+  app.get("/api/health", (_req, res) => {
+    res.json({ status: "ok", message: "Backend is operational" });
+  });
+
   app.post("/api/contact", async (req, res) => {
+    console.log("Contact form request received:", req.body);
     try {
       const validatedData = insertContactMessageSchema.parse(req.body);
       const message = await storage.createContactMessage(validatedData);

@@ -71,8 +71,10 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
 });
 
 if (process.env.NODE_ENV === "production") {
-  // In production, serve static files
-  serveStatic(app);
+  // In production, serve static files (except on Vercel, which handles them natively)
+  if (!process.env.VERCEL) {
+    serveStatic(app);
+  }
 
   // Re-enable server listening for non-Vercel production environments
   if (!process.env.VERCEL) {
