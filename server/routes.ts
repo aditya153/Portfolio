@@ -6,10 +6,10 @@ import { z } from "zod";
 import path from "path";
 import fs from "fs";
 
-export async function registerRoutes(
+export function registerRoutes(
   httpServer: Server,
   app: Express
-): Promise<Server> {
+): Server {
 
   app.post("/api/contact", async (req, res) => {
     try {
