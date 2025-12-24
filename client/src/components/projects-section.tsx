@@ -50,6 +50,7 @@ const projects: Project[] = [
     ],
     technologies: ["React.js", "Vannila CSS", "CrewAI", "Docker", "PostgreSQL", "GPT-4", "FastAPI", "MCP"],
     github: "https://github.com/aditya153/address-change-automation",
+    demo: "https://address-change-automation.vercel.app/login",
     image: "/infographic.png",
     featured: true,
     status: "Active Project",
