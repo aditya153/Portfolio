@@ -23,13 +23,13 @@ const experiences: Experience[] = [
     period: "Dec 2022 – Feb 2024",
     type: "Full-time",
     description: [
-      "Developed enterprise-grade microservices and REST APIs using Java Spring Boot for real-time data processing in an IoT energy management platform with firmware-like architecture",
+      "Developed scalable backend systems with Python (Django) that seamlessly handle growing user bases, ensuring real-time data synchronization between IoT devices and user interfaces",
       "Built modular backend services following microservice architecture patterns for improved scalability and maintainability in cross-functional teams",
-      "Implemented secure authentication processes with Spring Security and JWT for role-based access control across multiple user levels",
-      "Optimized MongoDB queries reducing latency by over 40% and improving response times for live data visualizations",
-      "Collaborated throughout agile development cycles including sprint planning, code reviews, test automation, and release management",
+      "Developed ETL scripts and parsers to automate live data processing, reducing manual data cleaning time by 40% and significantly improving data quality",
+      "Optimized SQL database queries within Django ORM, reducing data storage latency from 500ms to under 200ms",
+      "Collaborated throughout agile development cycles including sprint planning, code reviews, test automation, and release management with initiative and teamwork",
     ],
-    technologies: ["Java", "Spring Boot", "React.js", "Git", "MongoDB", "REST APIs", "JWT"],
+    technologies: ["Python", "Django", "React.js", "Git", "PostgreSQL", "REST APIs", "Microservices"],
   },
   {
     id: "quant-masters",
@@ -39,24 +39,24 @@ const experiences: Experience[] = [
     period: "Aug 2022 – Nov 2022",
     type: "Internship",
     description: [
-      "Independently conducted ETL processes to clean and prepare large financial datasets through exploratory data analysis, gaining extensive experience with Big Data and test data analysis",
+      "Implemented ETL pipelines for large datasets using Pandas, reducing data preprocessing time by 35%",
       "Created anomaly detection models using Support Vector Machine (SVM) algorithm to identify unusual financial transactions and improve fraud monitoring",
-      "Designed semantic data models and built interactive dashboards with Power BI using DAX, Power Query, and Dataflows for advanced metrics and visualization",
-      "Developed proof-of-concept models and translated complex results into clear insights for stakeholder presentations to support informed decision-making in fraud detection",
+      "Developed anomaly detection models with Python and TensorFlow, increasing fraud detection accuracy by 20%",
+      "Built interactive dashboards in Power BI using DAX, Power Query, and Dataflows to visualize complex model results for stakeholder presentations and support informed decision-making",
     ],
-    technologies: ["Python", "Scikit-learn", "TensorFlow", "Power BI", "DAX", "ETL", "SVM"],
+    technologies: ["Python", "Scikit-learn", "TensorFlow", "Power BI", "DAX", "Pandas", "ETL"],
   },
 ];
 
 // Helper function to highlight keywords in experience descriptions
 const highlightKeywords = (text: string) => {
   const keywords = [
-    'microservices', 'REST APIs', 'Java Spring Boot', 'real-time data processing',
-    'IoT', 'microservice architecture', 'scalability', 'Spring Security', 'JWT',
-    'role-based access control', 'MongoDB', '40%', 'agile development',
-    'ETL processes', 'Big Data', 'anomaly detection', 'Support Vector Machine',
+    'Python', 'Django', 'microservice architecture', 'real-time data synchronization',
+    'IoT', 'scalability', 'ETL', '40%', '35%', '20%', 'Django ORM',
+    '500ms', '200ms', 'agile development', 'PostgreSQL',
+    'ETL pipelines', 'Pandas', 'anomaly detection', 'Support Vector Machine',
     'SVM', 'fraud monitoring', 'Power BI', 'DAX', 'Power Query',
-    'proof-of-concept', 'fraud detection'
+    'TensorFlow', 'fraud detection', 'data quality'
   ];
 
   let parts: (string | JSX.Element)[] = [text];
