@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { TiltCard } from "@/components/ui/tilt-card";
 import { ExternalLink, Github, Bot, Workflow, Users, FileText, Brain } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -113,105 +114,107 @@ export function ProjectsSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.15 }}
             >
-              <Card
-                className="group overflow-visible h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5"
-                data-testid={`card-project-${project.id}`}
-              >
-                {project.image && (
-                  <div className="relative overflow-hidden rounded-t-lg">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-48 md:h-56 object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
-                    <Badge
-                      className="absolute top-4 right-4"
-                      variant={project.status === "Active Project" ? "default" : "secondary"}
-                      data-testid={`badge-status-${project.id}`}
-                    >
-                      {project.status}
-                    </Badge>
-                  </div>
-                )}
-
-                {!project.image && (
-                  <div className="relative h-48 md:h-56 rounded-t-lg bg-gradient-to-br from-primary/10 via-chart-5/5 to-chart-2/10 flex items-center justify-center overflow-hidden">
-                    <div className="text-6xl font-display font-bold gradient-text opacity-30">
-                      {project.title.split(" ").map(w => w[0]).join("")}
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
-                    <Badge
-                      className="absolute top-4 right-4"
-                      variant={project.status === "Active Project" ? "default" : "secondary"}
-                      data-testid={`badge-status-${project.id}`}
-                    >
-                      {project.status}
-                    </Badge>
-                  </div>
-                )}
-
-                <CardHeader className="pb-4">
-                  <CardTitle className="text-xl md:text-2xl font-display">
-                    {project.title}
-                  </CardTitle>
-                  <CardDescription className="text-base">
-                    {project.subtitle}
-                  </CardDescription>
-                </CardHeader>
-
-                <CardContent className="space-y-6">
-                  <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
-                    {project.description}
-                  </p>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    {project.features.map((feature, idx) => (
-                      <div
-                        key={idx}
-                        className="p-3 rounded-md bg-muted/50 text-center transition-colors hover:bg-muted"
+              <TiltCard tiltIntensity={8} glareEnabled={true} glareOpacity={0.1} scale={1.02}>
+                <Card
+                  className="group overflow-visible h-full"
+                  data-testid={`card-project-${project.id}`}
+                >
+                  {project.image && (
+                    <div className="relative overflow-hidden rounded-t-lg">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-48 md:h-56 object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
+                      <Badge
+                        className="absolute top-4 right-4"
+                        variant={project.status === "Active Project" ? "default" : "secondary"}
+                        data-testid={`badge-status-${project.id}`}
                       >
-                        <div className="text-primary mb-2 flex justify-center">
-                          {feature.icon}
-                        </div>
-                        <h4 className="text-sm font-medium text-foreground mb-1">
-                          {feature.title}
-                        </h4>
-                        <p className="text-xs text-muted-foreground">
-                          {feature.description}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech) => (
-                      <Badge key={tech} variant="outline" className="text-xs font-mono">
-                        {tech}
+                        {project.status}
                       </Badge>
-                    ))}
-                  </div>
+                    </div>
+                  )}
 
-                  <div className="flex flex-wrap gap-3 pt-2">
-                    {project.github && (
-                      <Button variant="outline" size="sm" asChild data-testid={`link-github-${project.id}`}>
-                        <a href={project.github} target="_blank" rel="noopener noreferrer">
-                          <Github className="mr-2 h-4 w-4" />
-                          View Code
-                        </a>
-                      </Button>
-                    )}
-                    {project.demo && (
-                      <Button size="sm" asChild data-testid={`link-demo-${project.id}`}>
-                        <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                          <ExternalLink className="mr-2 h-4 w-4" />
-                          Live Demo
-                        </a>
-                      </Button>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
+                  {!project.image && (
+                    <div className="relative h-48 md:h-56 rounded-t-lg bg-gradient-to-br from-primary/10 via-chart-5/5 to-chart-2/10 flex items-center justify-center overflow-hidden">
+                      <div className="text-6xl font-display font-bold gradient-text opacity-30">
+                        {project.title.split(" ").map(w => w[0]).join("")}
+                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
+                      <Badge
+                        className="absolute top-4 right-4"
+                        variant={project.status === "Active Project" ? "default" : "secondary"}
+                        data-testid={`badge-status-${project.id}`}
+                      >
+                        {project.status}
+                      </Badge>
+                    </div>
+                  )}
+
+                  <CardHeader className="pb-4">
+                    <CardTitle className="text-xl md:text-2xl font-display">
+                      {project.title}
+                    </CardTitle>
+                    <CardDescription className="text-base">
+                      {project.subtitle}
+                    </CardDescription>
+                  </CardHeader>
+
+                  <CardContent className="space-y-6">
+                    <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
+                      {project.description}
+                    </p>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      {project.features.map((feature, idx) => (
+                        <div
+                          key={idx}
+                          className="p-3 rounded-md bg-muted/50 text-center transition-colors hover:bg-muted"
+                        >
+                          <div className="text-primary mb-2 flex justify-center">
+                            {feature.icon}
+                          </div>
+                          <h4 className="text-sm font-medium text-foreground mb-1">
+                            {feature.title}
+                          </h4>
+                          <p className="text-xs text-muted-foreground">
+                            {feature.description}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="flex flex-wrap gap-2">
+                      {project.technologies.map((tech) => (
+                        <Badge key={tech} variant="outline" className="text-xs font-mono">
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
+
+                    <div className="flex flex-wrap gap-3 pt-2">
+                      {project.github && (
+                        <Button variant="outline" size="sm" asChild data-testid={`link-github-${project.id}`}>
+                          <a href={project.github} target="_blank" rel="noopener noreferrer">
+                            <Github className="mr-2 h-4 w-4" />
+                            View Code
+                          </a>
+                        </Button>
+                      )}
+                      {project.demo && (
+                        <Button size="sm" asChild data-testid={`link-demo-${project.id}`}>
+                          <a href={project.demo} target="_blank" rel="noopener noreferrer">
+                            <ExternalLink className="mr-2 h-4 w-4" />
+                            Live Demo
+                          </a>
+                        </Button>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              </TiltCard>
             </motion.div>
           ))}
         </div>
