@@ -6,6 +6,145 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const roles = ["Software Developer", "AI/ML Engineer", "Full-Stack Developer"];
 
+// Aurora Background Component - Aceternity UI Style
+function AuroraBackground() {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Dark base */}
+      <div className="absolute inset-0 bg-black" />
+
+      {/* Aurora container with flowing ribbons */}
+      <div className="absolute inset-0" style={{ filter: 'blur(80px) saturate(150%)' }}>
+        {/* Blue flowing ribbon - sweeping from left */}
+        <div
+          className="absolute w-[120%] h-[60%]"
+          style={{
+            top: '-20%',
+            left: '-10%',
+            background: `
+              linear-gradient(
+                to right,
+                transparent 0%,
+                rgba(56, 189, 248, 0.5) 20%,
+                rgba(99, 102, 241, 0.6) 40%,
+                rgba(59, 130, 246, 0.4) 60%,
+                transparent 80%
+              )
+            `,
+            transform: 'rotate(-12deg)',
+            animation: 'aurora-ribbon-1 8s ease-in-out infinite',
+          }}
+        />
+
+        {/* Pink/Magenta flowing ribbon - sweeping from right */}
+        <div
+          className="absolute w-[120%] h-[50%]"
+          style={{
+            top: '-10%',
+            right: '-10%',
+            background: `
+              linear-gradient(
+                to left,
+                transparent 0%,
+                rgba(236, 72, 153, 0.6) 20%,
+                rgba(244, 114, 182, 0.5) 40%,
+                rgba(168, 85, 247, 0.4) 60%,
+                transparent 80%
+              )
+            `,
+            transform: 'rotate(10deg)',
+            animation: 'aurora-ribbon-2 10s ease-in-out infinite',
+          }}
+        />
+
+        {/* Cyan accent ribbon */}
+        <div
+          className="absolute w-[100%] h-[40%]"
+          style={{
+            top: '0%',
+            left: '20%',
+            background: `
+              linear-gradient(
+                135deg,
+                transparent 0%,
+                rgba(34, 211, 238, 0.4) 30%,
+                rgba(6, 182, 212, 0.5) 50%,
+                transparent 70%
+              )
+            `,
+            transform: 'rotate(-5deg)',
+            animation: 'aurora-ribbon-3 12s ease-in-out infinite',
+          }}
+        />
+
+        {/* Deep purple undertow */}
+        <div
+          className="absolute w-[100%] h-[45%]"
+          style={{
+            top: '-5%',
+            left: '-5%',
+            background: `
+              linear-gradient(
+                to right,
+                transparent 0%,
+                rgba(139, 92, 246, 0.3) 30%,
+                rgba(124, 58, 237, 0.4) 50%,
+                transparent 70%
+              )
+            `,
+            transform: 'rotate(-8deg)',
+            animation: 'aurora-ribbon-1 15s ease-in-out infinite reverse',
+          }}
+        />
+      </div>
+
+      {/* Gradient fade to content area */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 50%, rgba(10,10,15,0.9) 80%, rgb(10,10,15) 100%)',
+        }}
+      />
+
+      {/* CSS Keyframes */}
+      <style>{`
+        @keyframes aurora-ribbon-1 {
+          0%, 100% {
+            transform: rotate(-12deg) translateX(0%) translateY(0%);
+          }
+          33% {
+            transform: rotate(-10deg) translateX(5%) translateY(-3%);
+          }
+          66% {
+            transform: rotate(-14deg) translateX(-3%) translateY(2%);
+          }
+        }
+        
+        @keyframes aurora-ribbon-2 {
+          0%, 100% {
+            transform: rotate(10deg) translateX(0%) translateY(0%);
+          }
+          33% {
+            transform: rotate(8deg) translateX(-5%) translateY(3%);
+          }
+          66% {
+            transform: rotate(12deg) translateX(3%) translateY(-2%);
+          }
+        }
+        
+        @keyframes aurora-ribbon-3 {
+          0%, 100% {
+            transform: rotate(-5deg) translateX(0%) translateY(0%) scale(1);
+          }
+          50% {
+            transform: rotate(-3deg) translateX(3%) translateY(-2%) scale(1.05);
+          }
+        }
+      `}</style>
+    </div>
+  );
+}
+
 export function HeroSection() {
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
@@ -48,12 +187,10 @@ export function HeroSection() {
   return (
     <section
       id="about"
-      className="min-h-screen flex flex-col justify-center items-center relative px-6 md:px-8 pt-16"
+      className="min-h-screen flex flex-col justify-center items-center relative px-6 md:px-8 pt-16 overflow-hidden"
     >
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-gradient" />
-        <div className="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-chart-5/10 rounded-full blur-3xl animate-gradient" style={{ animationDelay: "-4s" }} />
-      </div>
+      {/* Aurora Background */}
+      <AuroraBackground />
 
       <div className="max-w-4xl mx-auto text-center relative z-10">
         <div
