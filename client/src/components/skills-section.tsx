@@ -1,5 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { motion } from "framer-motion";
 import {
   Code2,
   Database,
@@ -108,10 +109,60 @@ function getLevelStyles(level: "expert" | "proficient" | "familiar") {
 }
 
 export function SkillsSection() {
+  // Container animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  // Card animation variants
+  const cardVariants = {
+    hidden: {
+      opacity: 0,
+      y: 40,
+      scale: 0.95,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 15,
+      },
+    },
+  };
+
+  // Header animation variants
+  const headerVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+  };
+
   return (
     <section id="skills" className="py-12 md:py-20 px-6 md:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={headerVariants}
+        >
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Skills & Technologies
           </h2>
@@ -132,56 +183,69 @@ export function SkillsSection() {
               Familiar
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {skillCategories.map((category, index) => (
-            <Card
-              key={category.id}
-              className="animate-fadeInUp overflow-visible"
-              style={{ animationDelay: `${index * 0.1}s` }}
-              data-testid={`card-skills-${category.id}`}
-            >
-              <CardHeader className="pb-4">
-                <CardTitle className="flex items-center gap-3 text-lg font-display">
-                  <span className="p-2 rounded-md bg-primary/10 text-primary">
-                    {category.icon}
-                  </span>
-                  {category.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill) => (
-                    <Badge
-                      key={skill.name}
-                      variant="outline"
-                      className={`font-mono text-xs ${getLevelStyles(skill.level)}`}
-                    >
-                      {skill.name}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={containerVariants}
+        >
+          {skillCategories.map((category) => (
+            <motion.div key={category.id} variants={cardVariants}>
+              <Card
+                className="overflow-visible h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5"
+                data-testid={`card-skills-${category.id}`}
+              >
+                <CardHeader className="pb-4">
+                  <CardTitle className="flex items-center gap-3 text-lg font-display">
+                    <span className="p-2 rounded-md bg-primary/10 text-primary">
+                      {category.icon}
+                    </span>
+                    {category.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap gap-2">
+                    {category.skills.map((skill) => (
+                      <Badge
+                        key={skill.name}
+                        variant="outline"
+                        className={`font-mono text-xs ${getLevelStyles(skill.level)}`}
+                      >
+                        {skill.name}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <Card className="mt-12 animate-fadeInUp" style={{ animationDelay: "0.6s" }}>
-          <CardContent className="p-6">
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              <Wrench className="h-5 w-5 text-muted-foreground" />
-              <span className="text-muted-foreground">Other Tools:</span>
-              {["Microsoft Office", "Excel Advanced", "PowerPoint", "Agile/Scrum", "JIRA"].map(
-                (tool) => (
-                  <Badge key={tool} variant="secondary" className="font-mono text-xs">
-                    {tool}
-                  </Badge>
-                )
-              )}
-            </div>
-          </CardContent>
-        </Card>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          <Card className="mt-12">
+            <CardContent className="p-6">
+              <div className="flex flex-wrap items-center justify-center gap-4">
+                <Wrench className="h-5 w-5 text-muted-foreground" />
+                <span className="text-muted-foreground">Other Tools:</span>
+                {["Microsoft Office", "Excel Advanced", "PowerPoint", "Agile/Scrum", "JIRA"].map(
+                  (tool) => (
+                    <Badge key={tool} variant="secondary" className="font-mono text-xs">
+                      {tool}
+                    </Badge>
+                  )
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
       </div>
     </section>
   );

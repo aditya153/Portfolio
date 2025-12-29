@@ -99,14 +99,20 @@ export function ExperienceSection() {
   return (
     <section id="experience" className="py-12 md:py-20 px-6 md:px-8">
       <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Work Experience
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Building impactful software solutions across enterprise systems and machine learning applications
           </p>
-        </div>
+        </motion.div>
 
         <div className="relative">
           <div className="absolute left-4 md:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-primary/50 to-transparent" />
