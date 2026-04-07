@@ -221,4 +221,4 @@ export function ProjectsSection() {
       </div>
     </section>
   );
-
+}
